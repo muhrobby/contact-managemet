@@ -1,12 +1,5 @@
-import { db } from "./config/Database.js";
-import { Address, Contact, User } from "./models/Model.js";
+import { connectDb } from "./config/connectDb.js";
 
-try {
-  await db.authenticate();
-  User.sync();
-  Contact.sync();
-  Address.sync();
-  console.log("database connected successfully");
-} catch (error) {
-  console.log("database error: " + error);
-}
+(async () => {
+  await connectDb();
+})();

@@ -9,15 +9,15 @@ export const User = db.define("users", {
   },
   password: {
     type: DataTypes.STRING(100),
-    allowNull: true,
+    allowNull: false,
   },
   name: {
     type: DataTypes.STRING(100),
-    allowNull: true,
+    allowNull: false,
   },
   token: {
     type: DataTypes.STRING(100),
-    allowNull: false,
+    allowNull: true,
   },
 });
 

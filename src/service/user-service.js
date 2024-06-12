@@ -27,18 +27,18 @@ const register = async (request) => {
 
   user.password = await bcrypt.hash(user.password, 10);
 
-  return await User.create({
+  await User.create({
     username: user.username,
     name: user.name,
     password: user.password,
   });
 
-  // const data = {
-  //   username: user.username,
-  //   name: user.name,
-  // };
+  const data = {
+    username: user.username,
+    name: user.name,
+  };
 
-  // return data;
+  return data;
 };
 
 const login = async (request) => {
@@ -47,12 +47,12 @@ const login = async (request) => {
   const findUser = await User.findOne({ where: { username: user.username } });
 
   if (!findUser) {
-    throw new responseError(400, "User not Found");
+    throw new responseError(401, "Username or password not Found");
   }
 
   const valid = await bcrypt.compare(user.password, findUser.password);
   if (!valid) {
-    throw new responseError(400, "Invalid password");
+    throw new responseError(401, "Username or password not Found");
   }
   const data = {
     id: findUser.id,
